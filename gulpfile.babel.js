@@ -107,7 +107,7 @@ if (!isProduction) {
   b = watchify(b);
 }
 
-var bundle = function() {
+var bundle = () => {
   var s = (
     b.bundle()
       .on('error', $.util.log.bind($.util, 'Browserify Error'))
@@ -125,7 +125,7 @@ var bundle = function() {
     }));
 };
 
-gulp.task('browserify', function() {
+gulp.task('browserify', () => {
   if (!isProduction) {
     b.on('update', bundle).on('log', $.util.log);
   }
@@ -143,12 +143,12 @@ gulp.task('html', () => {
 });
 
 // 洗刷刷
-gulp.task('clean', function() {
+gulp.task('clean', () => {
   return del(['dist/*', '!dist/.git'], {dot: true});
 });
 
 // 监视源文件变化自动cd编译
-gulp.task('watch', function() {
+gulp.task('watch', () => {
   gulp.watch('app/**/*.html', ['html']);
   gulp.watch('app/less/**/*less', ['styles']);
   gulp.watch('app/i/**/*', ['images']);
@@ -168,6 +168,6 @@ gulp.task('default', ['build', 'watch'], () => {
   gulp.watch(['dist/**/*'], bs.reload);
 });
 
-gulp.task('build', function (cb) {
+gulp.task('build', (cb) => {
   runSequence('clean', ['styles', 'jshint', 'html', 'images', 'copy', 'browserify'], cb);
 });
