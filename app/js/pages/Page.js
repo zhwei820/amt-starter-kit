@@ -7,11 +7,14 @@ import {
   Link,
 } from 'react-router';
 
-const pages = {
-  Page1: require('./Page1'),
-  Page2: require('./Page2'),
-};
+import Page1 from './Page1';
+import Page2 from './Page2';
 import NotFound from './NotFound';
+
+const pages = {
+  Page1,
+  Page2,
+};
 
 const Page = React.createClass({
   render() {

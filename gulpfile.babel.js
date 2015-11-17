@@ -16,7 +16,6 @@ const $ = gulpLoadPlugins();
 const isProduction = process.env.NODE_ENV === "production";
 
 const AUTOPREFIXER_BROWSERS = [
-  'ie >= 10',
   'ie_mob >= 10',
   'ff >= 40',
   'chrome >= 40',
@@ -54,6 +53,11 @@ gulp.task('images', () => {
     })))
     .pipe(gulp.dest(paths.dist.i))
     .pipe($.size({title: 'images'}));
+});
+
+// 清除 gulp-cache 缓存
+gulp.task('clearCache', (done) => {
+  return $.cache.clearAll(done);
 });
 
 // 拷贝相关资源
@@ -150,14 +154,14 @@ gulp.task('clean', () => {
 // 监视源文件变化自动cd编译
 gulp.task('watch', () => {
   gulp.watch('app/**/*.html', ['html']);
-  gulp.watch('app/less/**/*less', ['styles']);
+  gulp.watch('app/style/**/*.scss', ['styles']);
   gulp.watch('app/i/**/*', ['images']);
   gulp.watch('app/js/**/*', ['jshint']);
 });
 
 // 启动预览服务，并监视 Dist 目录变化自动刷新浏览器
 gulp.task('default', ['build', 'watch'], () => {
-  let bs = browserSync.create();
+  const bs = browserSync.create();
 
   bs.init({
     notify: false,
