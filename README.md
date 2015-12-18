@@ -55,11 +55,5 @@ npm start
 设置 Node 环境变量为 `production` 后，HTML 中引用的 CSS 和 JS 会替换为 minify 的版本。
 
 ```
-NODE_ENV=production gulp build
-```
-
-**[fish](http://fishshell.com/)**:
-
-```
-env NODE_ENV=production gulp build
+npm run build
 ```

@@ -7,10 +7,7 @@ import gulpLoadPlugins from  'gulp-load-plugins';
 import del from  'del';
 import runSequence from  'run-sequence';
 import browserSync from 'browser-sync';
-import browserify from 'browserify';
-import watchify from  'watchify';
-import source from  'vinyl-source-stream';
-import buffer from  'vinyl-buffer';
+import webpack from 'webpack-stream';
 
 const $ = gulpLoadPlugins();
 const isProduction = process.env.NODE_ENV === "production";
@@ -98,28 +95,26 @@ gulp.task('styles', () => {
     .pipe($.size({title: 'styles'}));
 });
 
-// 打包 Common JS 模块
-var b = browserify({
-  cache: {},
-  packageCache: {},
-  entries: ['./app/js/app.js'],
-  debug: !isProduction,
-  transform: ['babelify']
-});
-
-if (!isProduction) {
-  b = watchify(b);
-}
-
-var bundle = () => {
-  var s = (
-    b.bundle()
-      .on('error', $.util.log.bind($.util, 'Browserify Error'))
-      .pipe(source('app.js'))
-      .pipe(buffer())
-      .pipe(gulp.dest(paths.dist.js))
-      .pipe($.size({title: 'script'}))
-  );
+// 打包 JS
+gulp.task('js', () => {
+  const s = gulp.src('./app/js/app.js')
+    .pipe(webpack({
+      watch: false,
+      output: {
+        filename: 'app.js'
+      },
+      module: {
+        loaders: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel'
+          }
+        ]
+      },
+    }))
+    .pipe(gulp.dest(paths.dist.js))
+    .pipe($.size({title: 'script'}));
 
   return !isProduction ? s : s.pipe($.uglify())
     .pipe($.rename({suffix: '.min'}))
@@ -127,14 +122,6 @@ var bundle = () => {
     .pipe($.size({
       title: 'script minify'
     }));
-};
-
-gulp.task('browserify', () => {
-  if (!isProduction) {
-    b.on('update', bundle).on('log', $.util.log);
-  }
-
-  return bundle();
 });
 
 // 压缩 HTML
@@ -151,12 +138,12 @@ gulp.task('clean', () => {
   return del(['dist/*', '!dist/.git'], {dot: true});
 });
 
-// 监视源文件变化自动cd编译
+// 监视源文件变化自动编译
 gulp.task('watch', () => {
   gulp.watch('app/**/*.html', ['html']);
   gulp.watch('app/style/**/*.scss', ['styles']);
   gulp.watch('app/i/**/*', ['images']);
-  gulp.watch('app/js/**/*', ['jshint']);
+  gulp.watch('app/js/**/*', ['jshint', 'js']);
 });
 
 // 启动预览服务，并监视 Dist 目录变化自动刷新浏览器
@@ -173,5 +160,5 @@ gulp.task('default', ['build', 'watch'], () => {
 });
 
 gulp.task('build', (cb) => {
-  runSequence('clean', ['styles', 'jshint', 'html', 'images', 'copy', 'browserify'], cb);
+  runSequence('clean', ['styles', 'jshint', 'html', 'images', 'copy', 'js'], cb);
 });
