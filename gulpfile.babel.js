@@ -4,9 +4,10 @@
 
 import gulp from  'gulp';
 import gulpLoadPlugins from  'gulp-load-plugins';
+import autoprefixer from 'autoprefixer';
+import browserSync from 'browser-sync';
 import del from  'del';
 import runSequence from  'run-sequence';
-import browserSync from 'browser-sync';
 import webpack from 'webpack-stream';
 
 const $ = gulpLoadPlugins();
@@ -87,7 +88,7 @@ gulp.task('styles', () => {
     .pipe($.sass({
       outputStyle: 'expanded'
     }).on('error', $.sass.logError))
-    .pipe($.autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
+    .pipe($.postcss([autoprefixer({browsers: AUTOPREFIXER_BROWSERS})]))
     .pipe(gulp.dest('dist/css'))
     .pipe($.csso())
     .pipe($.rename({suffix: '.min'}))
