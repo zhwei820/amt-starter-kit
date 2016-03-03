@@ -7,6 +7,7 @@ import {
   Route,
   Link,
   IndexRoute,
+  hashHistory,
 } from 'react-router';
 import {
   Container,
@@ -60,7 +61,7 @@ import Index from './pages/Index';
 import Page from './pages/Page';
 
 const routes = (
-  <Router>
+  <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Index} />
       <Route path=":page" component={Page} />
