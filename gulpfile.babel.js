@@ -11,7 +11,7 @@ import runSequence from  'run-sequence';
 import webpack from 'webpack-stream';
 
 const $ = gulpLoadPlugins();
-const isProduction = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === "production";
 
 const AUTOPREFIXER_BROWSERS = [
   'ie_mob >= 10',
@@ -100,6 +100,7 @@ gulp.task('styles', () => {
 gulp.task('js', () => {
   const s = gulp.src('./app/js/app.js')
     .pipe(webpack({
+      devtool: !isProd ? '#eval' : null,
       watch: false,
       output: {
         filename: 'app.js'
@@ -117,7 +118,7 @@ gulp.task('js', () => {
     .pipe(gulp.dest(paths.dist.js))
     .pipe($.size({title: 'script'}));
 
-  return !isProduction ? s : s.pipe($.uglify())
+  return !isProd ? s : s.pipe($.uglify())
     .pipe($.rename({suffix: '.min'}))
     .pipe(gulp.dest(paths.dist.js))
     .pipe($.size({
@@ -129,7 +130,7 @@ gulp.task('js', () => {
 gulp.task('html', () => {
   return gulp.src('app/**/*.html')
     .pipe($.minifyHtml())
-    .pipe($.replace(/\{\{__VERSION__\}\}/g, isProduction ? '.min' : ''))
+    .pipe($.replace(/\{\{__VERSION__\}\}/g, isProd ? '.min' : ''))
     .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'html'}));
 });

@@ -4,7 +4,7 @@ import {
   Group,
 } from 'amazeui-touch';
 
-const Page1 = React.createClass({
+export default class Page1 extends React.Component {
   render() {
     return (
       <Container {...this.props}>
@@ -14,7 +14,5 @@ const Page1 = React.createClass({
         </Group>
       </Container>
     );
-  },
-});
-
-export default Page1;
+  }
+}

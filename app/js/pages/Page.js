@@ -16,7 +16,7 @@ const pages = {
   Page2,
 };
 
-const Page = React.createClass({
+class Page extends React.Component {
   render() {
     let page = this.props.params.page;
 
@@ -29,9 +29,7 @@ const Page = React.createClass({
       component: Link,
       icon: 'left-nav',
       title: '返回',
-      props: {
-        to: '/',
-      },
+      to: '/',
     };
 
     return (
@@ -44,7 +42,7 @@ const Page = React.createClass({
         <Component scrollable />
       </View>
     );
-  },
-});
+  }
+}
 
 export default Page;

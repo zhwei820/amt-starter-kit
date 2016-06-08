@@ -3,7 +3,7 @@
   "rules": {
     /* JSX */
     "react/prop-types": [1, {
-      "ignore": ["className", "children"]
+      "ignore": ["className", "children", "params"]
     }],
     "react/sort-comp": [ // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md
       2,
@@ -40,6 +40,7 @@
           ]
         }
       }
-    ]
+    ],
+    "jsx-a11y/img-has-alt": [1, "Image"]
   }
 }

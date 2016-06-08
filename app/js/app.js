@@ -8,20 +8,22 @@ import {
   Link,
   IndexRoute,
   hashHistory,
+  withRouter,
 } from 'react-router';
 import {
   Container,
   TabBar,
 } from 'amazeui-touch';
 
-const App = React.createClass({
+class App extends React.Component {
   render() {
     const {
       location,
       params,
       children,
+      router,
       ...props,
-      } = this.props;
+    } = this.props;
     const transition = children.props.transition || 'sfr';
 
     return (
@@ -47,14 +49,14 @@ const App = React.createClass({
             icon="info"
             title="关于"
             badge="404"
-            selected={params.page === 'about'}
+            selected={router.isActive('/about', true)}
             to="/about"
           />
         </TabBar>
       </Container>
     );
-  },
-});
+  }
+}
 
 // Pages
 import Index from './pages/Index';
@@ -62,7 +64,7 @@ import Page from './pages/Page';
 
 const routes = (
   <Router history={hashHistory}>
-    <Route path="/" component={App}>
+    <Route path="/" component={withRouter(App)}>
       <IndexRoute component={Index} />
       <Route path=":page" component={Page} />
     </Route>

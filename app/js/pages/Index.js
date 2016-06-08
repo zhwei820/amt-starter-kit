@@ -10,12 +10,10 @@ import {
   Link,
 } from 'react-router';
 
-const Index = React.createClass({
-  getDefaultProps() {
-    return {
-      transition: 'rfr',
-    };
-  },
+export default class Index extends React.Component {
+  static defaultProps = {
+    transition: 'rfr'
+  };
 
   renderItems() {
     const pages = [
@@ -33,7 +31,7 @@ const Index = React.createClass({
         />
       );
     });
-  },
+  }
 
   render() {
     return (
@@ -54,7 +52,5 @@ const Index = React.createClass({
         </Container>
       </View>
     );
-  },
-});
-
-export default Index;
+  }
+}

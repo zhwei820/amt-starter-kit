@@ -21,7 +21,7 @@ const sliderIntance = (
   </Slider>
 );
 
-const Page2 = React.createClass({
+export default class Page2 extends React.Component {
   render() {
     return (
       <Container {...this.props}>
@@ -33,7 +33,5 @@ const Page2 = React.createClass({
         </Group>
       </Container>
     );
-  },
-});
-
-export default Page2;
+  }
+}
