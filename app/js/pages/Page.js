@@ -30,6 +30,7 @@ class Page extends React.Component {
       icon: 'left-nav',
       title: '返回',
       to: '/',
+      onlyActiveOnIndex: true,
     };
 
     return (
