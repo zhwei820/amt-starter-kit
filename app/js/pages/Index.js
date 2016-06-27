@@ -25,7 +25,8 @@ export default class Index extends React.Component {
       return (
         <List.Item
           linkComponent={Link}
-          linkProps={{to: `/${item.toLowerCase()}`}}
+          // 传递 query 参数
+          linkProps={{to: {pathname: `/${item.toLowerCase()}`, query: {q: item}}}}
           title={item}
           key={index}
         />

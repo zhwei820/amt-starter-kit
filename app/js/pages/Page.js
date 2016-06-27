@@ -19,6 +19,8 @@ const pages = {
 class Page extends React.Component {
   render() {
     let page = this.props.params.page;
+    // 使用 query
+    console.log(this.props.location.query);
 
     if (page) {
       page = page.charAt(0).toUpperCase() + page.slice(1);
