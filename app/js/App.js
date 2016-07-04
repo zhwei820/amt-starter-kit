@@ -36,6 +36,10 @@ class App extends React.Component {
       <Container direction="column" id="sk-container">
         <Container
           transition={transition}
+          // fade transition example
+          // transition='fade'
+          // transitionEnterTimeout={450}
+          // transitionLeaveTimeout={300}
         >
           {React.cloneElement(children, {key: location.key})}
         </Container>
