@@ -13,7 +13,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "amazeui-touch": "latest",
+    "amazeui-touch": "^1.0.0-rc.2",
     "autoprefixer": "^6.3.3",
     "babel-core": "^6.9.1",
     "babel-eslint": "^6.0.4",
@@ -24,6 +24,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "browser-sync": "^2.13.0",
+    "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
     "del": "^2.2.0",
     "del-cli": "^0.2.0",
@@ -55,7 +56,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "del dist",
     "start": "npm run clean && node server.js",
-    "build": "npm run clean && NODE_ENV=production webpack --webpack.config.babel.js --progress",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack --webpack.config.babel.js --progress",
     "preview": "npm run build && browser-sync start --server dist"
   }
 }
