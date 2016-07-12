@@ -103,6 +103,10 @@ module.exports = {
         loader: 'url?mimetype=application/font-woff&name=[name].[ext]'
       },
       {
+        test: /\.woff2$/,
+        loader: 'url?mimetype=application/font-woff2&name=[name].[ext]'
+      },
+      {
         test: /\.[ot]tf$/,
         loader: 'url?mimetype=application/octet-stream&name=[name].[ext]'
       },
