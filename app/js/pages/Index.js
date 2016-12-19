@@ -20,7 +20,7 @@ export default class Index extends React.Component {
       'Page1',
       'Page3',
       'Page4',
-      'Demo',
+      'PageDemo',
     ];
 
     return pages.map((item, index) => {
