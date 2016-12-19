@@ -11,7 +11,11 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
+  },
   "devDependencies": {
     "amazeui-touch": "^1.0.0",
     "autoprefixer": "^6.4.0",

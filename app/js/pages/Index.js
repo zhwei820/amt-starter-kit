@@ -18,7 +18,9 @@ export default class Index extends React.Component {
   renderItems() {
     const pages = [
       'Page1',
-      'Page2',
+      'Page3',
+      'Page4',
+      'Demo',
     ];
 
     return pages.map((item, index) => {

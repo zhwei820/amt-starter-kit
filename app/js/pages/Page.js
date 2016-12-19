@@ -7,17 +7,13 @@ import {
   Link,
 } from 'react-router';
 
-// import Page1 from './Page1';
 import Page1 from './page1/index';
-// import Page2 from './page2/index';
 import Page3 from './page3/index';
 
-import Page2 from './Page2';
-import NotFound from './NotFound';
 
 const pages = {
   Page1,
-  Page2,
+  Page3,
 };
 
 class Page extends React.Component {

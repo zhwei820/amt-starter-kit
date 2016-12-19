@@ -78,8 +78,14 @@ return (
 }
 
 // Pages
-import Index from './pages/Index';
 import Page from './pages/Page';
+
+import Index from './pages/Index';
+import NotFound from './pages/NotFound';
+import Page1 from './pages/page1/index';
+import Page3 from './pages/page3/index';
+import Page4 from './pages/page4/index';
+import Demo from './pages/demo';
 
 // withRouter HoC
 // @see https://github.com/reactjs/react-router/blob/0616f6e14337f68d3ce9f758aa73f83a255d6db3/upgrade-guides/v2.4.0.md#v240-upgrade-guide
@@ -99,6 +105,8 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
+
+
 const routes = (
 
   <Provider store={store}>
@@ -106,6 +114,11 @@ const routes = (
       <Route path="/" component={App}>
         <IndexRoute component={Index} />
         <Route path="/page" component={Page} />
+        <Route path="/about" component={NotFound} />
+        <Route path="/page1" component={Page1} />
+        <Route path="/page3" component={Page3} />
+        <Route path="/page4" component={Page4} />
+        <Route path="/demo" component={Demo} />
       </Route>
     </Router>
   </Provider>

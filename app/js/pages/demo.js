@@ -21,7 +21,7 @@ const sliderIntance = (
   </Slider>
 );
 
-export default class Page2 extends React.Component {
+export default class Demo extends React.Component {
   render() {
     return (
       <Container {...this.props}>
