@@ -87,12 +87,14 @@ import Page from './pages/Page';
 import auth from './reducers/auth';
 import user from './reducers/user';
 import reducers from './reducers/index';
+import todos from './reducers/todos';
 
 
 const rootReducer = combineReducers({
   auth,
   user,
-  reducers
+  reducers,
+  todos
 });
 
 const store = createStore(rootReducer, {}, applyMiddleware(thunk));
@@ -100,15 +102,13 @@ const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 const routes = (
 
   <Provider store={store}>
-
     <Router history={hashHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Index} />
-        <Route path=":page" component={Page} />
+        <Route path="/page" component={Page} />
       </Route>
     </Router>
   </Provider>
-
 
 );
 
